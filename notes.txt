@@ -1,1 +1,5 @@
 Data Available - From 3 July 1990 to 3 July 2026 - Initial Training of Model
+
+Features - 
+1. Daily Log Returns - captures direction or drift of the market
+2. 20-day Realised Volatility - Rolling standard deviation of daily log returns over the past 20 trading days which is i.e. the full month of trading - captures risk or turbulence level
