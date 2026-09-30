@@ -1,9 +1,13 @@
 # Import required libraries
 import os
 import pandas as pd
+from dotenv import load_dotenv
 
-# Define the folder path where your yearly CSV files are located
-folder_path = r"C:\Users\Riddhima Singh\Desktop\Hidden-Markov-Models\Nifty 50 Historical Data"  # Replace with your actual folder path
+#Load the variables from the .env file into Python's environment
+load_dotenv()
+
+#Access the variable using os.getenv()
+folder_path = os.getenv("folder_path_env") # Folder path where your yearly CSV files are located
 
 #Initializing an empty master dataframe
 master_dataframe = pd.DataFrame()
