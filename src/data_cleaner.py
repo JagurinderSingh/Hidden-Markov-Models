@@ -9,10 +9,11 @@ load_dotenv()
 #Access the variable using os.getenv()
 folder_path = os.getenv("folder_path_env") # Folder path where your yearly CSV files are located
 
-#Initializing an empty master dataframe
-master_dataframe = pd.DataFrame()
+def load_prepare_nifty_data(folder_path):
 
-def load_prepare_nifty_data(master_dataframe, folder_path):
+  #Initializing an empty master dataframe
+  master_list = []
+
   # Loop explicitly from 1 to 37 (range stops right before 38)
   for i in range(1, 38):
     # Construct the exact filename dynamically (1.csv, 2.csv, etc.)
@@ -20,13 +21,14 @@ def load_prepare_nifty_data(master_dataframe, folder_path):
     file_path = os.path.join(folder_path, file_name)
     #Load into a baby dataframe
     baby_dataframe = pd.read_csv(file_path)
-    # Appending it to master dataframe
-    master_dataframe = pd.concat([master_dataframe, baby_dataframe], ignore_index=True)
     # Converting into python datetime object
-    master_dataframe["Date"] = pd.to_datetime(master_dataframe["Date"])
+    baby_dataframe["Date"] = pd.to_datetime(baby_dataframe["Date"])
     # Sort chronologically: oldest date at the top, newest at the bottom
-    master_sorted_dataframe = master_dataframe.sort_values(by="Date", ascending=True).reset_index(drop=True)
+    baby_sorted_dataframe = baby_dataframe.sort_values(by="Date", ascending=True).reset_index(drop=True)
+    # Appending it to master list
+    master_list.append(baby_sorted_dataframe)
+    master_dataframe = pd.concat(master_list, ignore_index=True)
+    
+  return master_dataframe
 
-  return master_sorted_dataframe
-
-print(load_prepare_nifty_data(master_dataframe, folder_path))
+print(load_prepare_nifty_data(folder_path)) #- Use this line to see the output of this file
