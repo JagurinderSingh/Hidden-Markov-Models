@@ -31,4 +31,4 @@ def load_prepare_nifty_data(folder_path):
     
   return master_dataframe
 
-print(load_prepare_nifty_data(folder_path)) #- Use this line to see the output of this file
+#print(load_prepare_nifty_data(folder_path)) #- Use this line to see the output of this file
